@@ -1,5 +1,6 @@
 {
   "name": "sass-archie",
+  "version": "0.1.0",
   "description": "Sass modules and utilities to use in a modular css architecture.",
   "main": "index.js",
   "authors": [
