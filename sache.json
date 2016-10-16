@@ -1,0 +1,14 @@
+{
+  "name": "sass-archie",
+  "description": "Sass modules and utilities to use in a modular css architecture.",
+  "tags":  [
+    "Sass",
+    "CSS",
+    "stylesheet",
+    "modular",
+    "modules",
+    "utilities",
+    "framework",
+    "library"
+  ]
+}
