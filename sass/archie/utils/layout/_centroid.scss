@@ -1,0 +1,40 @@
+// ============================================================================
+// =Archie - Centroid
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/utils/display/ws";
+@import "archie/share";
+
+// =centroid([ $text-align, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin centroid( $text-align: center, $important: false )
+{
+  @include ws-remove($important);
+  text-align: css-value(center, $important);
+
+  &:before,
+  > * {
+    @include ws-reset($important);
+    display: inline-block;
+    vertical-align: middle;
+    text-align: css-value(unquote($text-align), $important);
+  }
+
+  &:before {
+    content: " ";
+    height: css-value(100%, $important);
+  }
+}
+
+// =-centroid( $text-align[, $important ])
+// -----------------------------------------------------------------------------
+/// @see centroid
+
+@mixin -centroid( $text-align, $important: false )
+{
+  @include archie-share('centroid', $text-align, $important) {
+    @include centroid($text-align, $important);
+  }
+}

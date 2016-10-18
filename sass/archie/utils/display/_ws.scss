@@ -1,0 +1,51 @@
+// ============================================================================
+// =Archie - White-space
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+@import "archie/settings";
+
+// =ws-remove([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin ws-remove( $important: false )
+{
+  font-family: css-value(sans-serif, $important);
+  letter-spacing: css-value(-0.31em, $important);
+  text-rendering: css-value(optimizeSpeed, $important);
+  *word-spacing: css-value(-0.43em, $important);
+}
+
+// =ws-reset([ $font-family, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin ws-reset( $important: false )
+{
+  font-family: css-value($base-font-family, $important);
+  letter-spacing: css-value(normal, $important);
+  text-rendering: css-value(auto, $important);
+  *word-spacing: css-value(normal, $important);
+}
+
+// =-ws-remove([ $important ])
+// -----------------------------------------------------------------------------
+/// @see ws-remove
+
+@mixin -ws-remove( $important: false )
+{
+  @include archie-share('ws-remove', $important) {
+    @include ws-remove($important);
+  }
+}
+
+// =-ws-reset([ $important ])
+// -----------------------------------------------------------------------------
+/// @see ws-reset
+
+@mixin -ws-reset( $important: false )
+{
+  @include archie-share('ws-reset', $important) {
+    @include ws-reset($important);
+  }
+}

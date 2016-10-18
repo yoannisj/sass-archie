@@ -1,0 +1,40 @@
+// ============================================================================
+// =Archie - Namespace
+// ============================================================================
+
+@import "shift/parse";
+@import "shift/context";
+
+// Functions
+// ============================================================================
+
+// =archie-namespace( $params[, $tweakpoint ])
+// -----------------------------------------------------------------------------
+/// Builds a namespace string for the given breakpoint parameters, or the
+/// current breakpoint context.
+
+@function archie-namespace( $params: null, $tweakpoint: null )
+{
+  $ns: '';
+
+  // get relevant properties from given parameters or context
+  $params: if($params, 
+    shift-parse($params, $tweakpoint),
+    shift-context('min-width-label' 'max-width-label')
+  );
+
+  $min-label: map-get($params, 'min-width-label');
+  $max-label: map-get($params, 'max-width-label');
+
+  // build ns string
+  @if $min-label {
+    $ns: '#{$ns}#{$min-label}';
+  }
+
+  @if $max-label {
+    $ns: '#{$ns}_#{$max-label}';
+  }
+
+  // terminate ns with hyphen
+  @return $ns;
+}

@@ -1,0 +1,72 @@
+// ============================================================================
+// =Archie - Breakpoint Helper
+// ============================================================================
+
+@import "shift/list";
+@import "shift/breakpoint";
+@import "archie/namespace";
+
+// Mixins
+// ============================================================================
+
+// =archie-breakpoint( $params[, $tweakpoint, $units ])
+// -----------------------------------------------------------------------------
+/// Wraps content into a media query for given breakpoint parameters. Delegates
+// to 'shift-breakpoint' and stores archie's specific context properties.
+
+@mixin archie-breakpoint( $params, $tweakpoint: null, $units: () )
+{
+  // register breakpoint prefix in context
+  $context: shift-context('archie-namespace', archie-namespace($params, $tweakpoint));
+
+  @include shift-breakpoint( $params, $tweakpoint, $units )
+  {
+    @content;
+  }
+}
+
+// =archie-breakpoints( $feature[, $tweakpoint, $units ])
+// -----------------------------------------------------------------------------
+/// Wraps content in a media-query for each breakpoint registered for the given
+/// media feature and tweakpoint.
+
+@mixin archie-breakpoints($feature, $tweakpoint: null, $units: ())
+{
+  $prefix: '';
+
+  // accept 'min-width' feature
+  @if $feature == 'min-width' {
+    $feature: 'width';
+    $prefix: 'w>';
+  }
+
+  // accept 'max-width' feature
+  @else if $feature == 'max-width' {
+    $feature: 'width';
+    $prefix: 'w<';
+  }
+
+  // accept 'min-height' feature
+  @else if $feature == 'min-height' {
+    $feature: 'height';
+    $prefix: 'h<';
+  }
+
+  // accept 'max-height' feature
+  @else if $feature == 'max-height' {
+    $feature: 'height';
+    $prefix: 'h>';
+  }
+
+  // get list of registered breakpoint labels for feature and tweakpoint
+  $labels: shift-labels($feature, $tweakpoint);
+
+  // include media query and content for each breakpoint
+  @each $label in $labels
+  {
+    @include archie-breakpoint('#{$prefix}#{$label}', $tweakpoint, $units)
+    {
+      @content;
+    }
+  }
+}

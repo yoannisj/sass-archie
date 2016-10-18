@@ -1,0 +1,45 @@
+// ============================================================================
+// =Archie - Clearfix
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =clearfix([ $contain-margins, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin clearfix( $contain-margins: false, $important: false )
+{
+  @if $contain-margins
+  {
+    &:before,
+    &:after {
+      content: "";
+      display: css-value(table, $important);
+    }
+
+    &:after {
+      clear: css-value(both, $important);
+    }
+  }
+
+  @else
+  {
+    &:after {
+      content: "";
+      display: block;
+      clear: css-value(both, $important);
+    }
+  }
+}
+
+// =-clearfix( $contain-margins[, $important ])
+// -----------------------------------------------------------------------------
+/// @see clearfix
+
+@mixin -clearfix( $contain-margins, $important: false )
+{
+  @include archie-share('clearfix', $contain-margins, $important) {
+    @include clearfix($contain-margins, $important);
+  }
+}

@@ -1,0 +1,34 @@
+// ============================================================================
+// =Archie - Image-Replacement
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =ir([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin ir( $important: false )
+{
+  display: css-value(inline-block, $important);
+  white-space: css-value(nowrap, $important);
+
+  overflow: css-value(hidden, $important);
+  text-indent: css-value(110%, $important);
+
+  // useful defaults for image replacing the element
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+// =-ir([ $important ])
+// -----------------------------------------------------------------------------
+/// @see ir
+
+@mixin -ir( $important: false )
+{
+  @include archie-share('ir', $important) {
+    @include ir($important);
+  }
+}

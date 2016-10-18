@@ -1,0 +1,23 @@
+// ============================================================================
+// =Archie - Component Helper
+// ============================================================================
+
+@import "archie/namespace";
+
+// Mixins
+// ============================================================================
+
+// =archie-component
+// -----------------------------------------------------------------------------
+/// Includes content in a component class, namespaced with breakpoint context.
+
+@mixin archie-component($name)
+{
+  // prefix component name with namespace
+  $ns: archie-namespace();
+  $name: if($ns, '#{$ns}-#{$name}', $name);
+
+  .#{$name} {
+    @content;
+  }
+}

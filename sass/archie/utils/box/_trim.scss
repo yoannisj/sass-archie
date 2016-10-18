@@ -1,0 +1,60 @@
+// ============================================================================
+// =Archie - Trim
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+@import "archie/utils/box/flush";
+
+// =trim( $side[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin trim( $side, $important: false )
+{
+  // accept 'all' keyword
+  @if $side == 'all'
+  {
+    @include -trim('ends', $important);
+    @include -trim('sides', $important);
+  }
+
+  // accept 'ends' keyword
+  @else if $side == 'ends'
+  {
+    @include -trim('top', $imporant);
+    @include -trim('bottom', $imporant);
+  }
+
+  // accept 'sides' keyword
+  @else if $side == 'sides' {
+    @include -trim('right', $imporant);
+    @include -trim('left', $imporant);
+  }
+
+  @else if $side == 'left'
+    or $side == 'top'
+  {
+    > :first-child {
+      @include -flush($side, $important);
+    }
+  }
+
+  @else if $side == 'bottom'
+    or $side == 'right'
+  {
+    > :last-child {
+      @include -flush($side, $important);
+    }
+  }
+}
+
+// =-trim( $side [, $important ])
+// -----------------------------------------------------------------------------
+/// @see trim
+
+@mixin -trim( $side, $important: false )
+{
+  @include archie-share('trim', $side, $important) {
+    @include trim($side, $important);
+  }
+}

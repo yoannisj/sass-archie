@@ -1,0 +1,26 @@
+// ============================================================================
+// =Archie - Median
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =median([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin median( $important: false )
+{
+  margin-left: css-value(auto, $important);
+  margin-right: css-value(auto, $important);
+}
+
+// =-median([ $important ])
+// -----------------------------------------------------------------------------
+/// @see median
+
+@mixin -median( $important: false )
+{
+  @include archie-share('median', $important) {
+    @include median($important);
+  }
+}

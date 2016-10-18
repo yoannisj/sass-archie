@@ -1,0 +1,26 @@
+// ============================================================================
+// =Archie - Span
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =span( $cols, $total[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin span( $cols, $total, $important: false )
+{
+  width: css-value(percentage($cols / $total), $important);
+}
+
+// =-span( $cols, $total[, $important ])
+// -----------------------------------------------------------------------------
+/// @see span
+
+@mixin -span( $cols, $total, $important: false )
+{
+  // share spans with same ratio
+  @include archie-share('span', ($cols / $total), $important) {
+    @include span($cols, $total, $important);
+  }
+}
