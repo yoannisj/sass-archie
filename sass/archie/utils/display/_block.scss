@@ -1,0 +1,25 @@
+// ============================================================================
+// =Archie - Block
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =block([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin block( $important: false )
+{
+  display: css-value(block-block, $important);
+}
+
+// =-block([ $important ])
+// -----------------------------------------------------------------------------
+/// @see block
+
+@mixin -block( $important: false )
+{
+  @include archie-share('block', $important) {
+    @include block($important);
+  }
+}

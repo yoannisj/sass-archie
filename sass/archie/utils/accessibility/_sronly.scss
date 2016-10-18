@@ -1,0 +1,32 @@
+// ============================================================================
+// =Archie - Screen-Reader-Only
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =sr-only([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin sronly( $important: false )
+{
+  position: css-value(absolute, $important);
+  width: css-value(1px, $important);
+  height: css-value(1px, $important);
+  margin: css-value(-1px, $important);
+  padding: css-value(0, $important);
+  border: css-value(0, $important);
+  overflow: css-value(hidden, $important);
+  clip: css-value(rect(0 0 0 0), $important);
+}
+
+// =-sronly([ $important ])
+// -----------------------------------------------------------------------------
+/// @see sronly
+
+@mixin -sronly( $important: false )
+{
+  @include archie-share('sronly', $important) {
+    @include sronly($important);
+  }
+}

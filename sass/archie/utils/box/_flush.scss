@@ -1,0 +1,45 @@
+// ============================================================================
+// =Archie - Flush
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =flush( $side[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin flush( $side, $important: false )
+{
+  // accept 'all' keyword
+  @if $side == 'all' {
+    @include -flush('ends', $important);
+    @include -flush('sides', $important);
+  }
+
+  // accept 'ends' keyword
+  @else if $side == 'ends' {
+    @include -flush('top', $imporant);
+    @include -flush('bottom', $imporant);
+  }
+
+  // accept 'sides' keyword
+  @else if $side == 'sides' {
+    @include -flush('right', $imporant);
+    @include -flush('left', $imporant);
+  }
+
+  @else {
+    margin-#{$side}: css-value(0, $important);
+  }
+}
+
+// =-flush( $side [, $important ])
+// -----------------------------------------------------------------------------
+/// @see flush
+
+@mixin -flush( $side, $important: false )
+{
+  @include archie-share('flush', $side, $important) {
+    @include flush($side, $important);
+  }
+}

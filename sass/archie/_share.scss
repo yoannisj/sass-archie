@@ -1,0 +1,27 @@
+// ============================================================================
+// =Archie - Screen-Reader-Only
+// ============================================================================
+
+@import "lilo/share";
+@import "shift/context";
+
+// Mixins
+// ============================================================================
+
+// =archie-share( $identifier[, $args... ])
+// -----------------------------------------------------------------------------
+/// Shares the included content with other modules in same context. Delegates
+/// to 'lilo-share' and prefixes identifier with breakpoint namespace.
+
+@mixin archie-share( $identifier, $args... )
+{
+  // prefix identifier with breakpoint namespace
+  $ns: shift-context('archie-namespace');
+  $identifier: if($ns, '#{$ns}-#{$identifier}', $identifier);
+
+  // share styles with sass-lilo
+  @include lilo-share($identifier, $args... )
+  {
+    @content;
+  }
+}

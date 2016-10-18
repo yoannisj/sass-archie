@@ -1,0 +1,32 @@
+// ============================================================================
+// =Archie - Align
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =align( $side[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin align( $side, $important: false )
+{
+  // accept 'none' as keyword for inherited text-alignment
+  @if $side == none {
+    text-align: css-value(none, $important);
+  }
+
+  @else {
+    text-align: css-value(unquote($side), $important);
+  }
+}
+
+// =-align( $side [, $important ])
+// -----------------------------------------------------------------------------
+/// @see align
+
+@mixin -align( $side, $important: false )
+{
+  @include archie-share('align', $side, $important) {
+    @include align($side, $important);
+  }
+}

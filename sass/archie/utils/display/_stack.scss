@@ -1,0 +1,28 @@
+// ============================================================================
+// =Archie - Stack
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/utils/display/block";
+@import "archie/share";
+
+// =stack([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin stack( $important: false )
+{
+  > * {
+    @include -block($important);
+  }
+}
+
+// =-stack([ $important ])
+// -----------------------------------------------------------------------------
+/// @see stack
+
+@mixin -stack( $important: false )
+{
+  @include archie-share('stack', $important) {
+    @include stack($important);
+  }
+}

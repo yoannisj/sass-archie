@@ -1,0 +1,25 @@
+// ============================================================================
+// =Archie - Float
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =float( $side[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin float( $side, $important: false )
+{
+  float: css-value(unquote($side), $important);
+}
+
+// =-float( $side[, $important ])
+// -----------------------------------------------------------------------------
+/// @see float
+
+@mixin -float( $side, $important: false )
+{
+  @include archie-share('float', $side, $important) {
+    @include float($side, $important);
+  }
+}

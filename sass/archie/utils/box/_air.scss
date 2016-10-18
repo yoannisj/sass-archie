@@ -1,0 +1,26 @@
+// ============================================================================
+// =Archie - Air
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "aleksi/sides/output-sides";
+@import "archie/share";
+
+// =air( $amount[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin air( $amount, $important: false )
+{
+  @include output-sides('margin', $amount, $important);
+}
+
+// =-air( $amount[, $important ])
+// -----------------------------------------------------------------------------
+/// @see air
+
+@mixin -air( $amount, $important: false )
+{
+  @include archie-share('air', $amount, $important) {
+    @include air($amount, $important);
+  }
+}

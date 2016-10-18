@@ -1,0 +1,28 @@
+// ============================================================================
+// =Archie - Bleed
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =bleed( $amount[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin bleed( $amount, $important: false )
+{
+  $bleed-amount: -1 * $amount;
+
+  margin-left: css-value($bleed-amount, $important);
+  margin-right: css-value($bleed-amount, $important);
+}
+
+// =-bleed( $amount[, $important ])
+// -----------------------------------------------------------------------------
+/// @see bleed
+
+@mixin -bleed( $amount, $important: false )
+{
+  @include archie-share('bleed', $amount, $important) {
+    @include bleed($amount, $important);
+  }
+}
