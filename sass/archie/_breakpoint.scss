@@ -16,11 +16,12 @@
 
 @mixin archie-breakpoint( $params, $tweakpoint: null, $units: () )
 {
-  // register breakpoint prefix in context
-  $context: shift-context('archie-namespace', archie-namespace($params, $tweakpoint));
-
   @include shift-breakpoint( $params, $tweakpoint, $units )
   {
+    // register breakpoint prefix in context
+    $context: shift-context('archie-namespace', archie-namespace($params, $tweakpoint));
+
+    // include content, with full context
     @content;
   }
 }

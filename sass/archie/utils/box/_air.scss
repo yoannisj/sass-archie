@@ -3,24 +3,48 @@
 // ============================================================================
 
 @import "aleksi/general/css-rule";
-@import "aleksi/sides/output-sides";
+@import "aleksi/sides/side-value";
+@import "archie/utils/box/trim";
 @import "archie/share";
 
-// =air( $amount[, $important ])
+// =air( $side, $amount[, $important ])
 // -----------------------------------------------------------------------------
 
-@mixin air( $amount, $important: false )
+@mixin air( $side, $amount, $important: false )
 {
-  @include output-sides('margin', $amount, $important);
+  // accept 'all' side keyword
+  @if $side == 'all' {
+    @include -air('ends', $amount, $important);
+    @include -air('sides', $amount, $important);
+  }
+
+  // accept 'ends' side keyword
+  @else if $side == 'ends' {
+    @include -air('top', $amount, $important);
+    @include -air('bottom', $amount, $important);
+  }
+
+  // accept 'sides' side keyword
+  @else if $side == 'sides' {
+    @include -air('left', $amount, $important);
+    @include -air('right', $amount, $important);
+  }
+
+  @else
+  {
+    > * {
+      margin-#{$side}: css-value(side-value($amount, $side), $important);
+    }
+  }
 }
 
-// =-air( $amount[, $important ])
+// =-air( $side, $amount[, $important ])
 // -----------------------------------------------------------------------------
 /// @see air
 
-@mixin -air( $amount, $important: false )
+@mixin -air( $side, $amount, $important: false )
 {
-  @include archie-share('air', $amount, $important) {
-    @include air($amount, $important);
+  @include archie-share('air', $side, $amount, $important) {
+    @include air($side, $amount, $important);
   }
 }

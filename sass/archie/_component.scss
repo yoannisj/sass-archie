@@ -3,6 +3,7 @@
 // ============================================================================
 
 @import "archie/namespace";
+@import "archie/breakpoint";
 
 // Mixins
 // ============================================================================
@@ -11,13 +12,24 @@
 // -----------------------------------------------------------------------------
 /// Includes content in a component class, namespaced with breakpoint context.
 
-@mixin archie-component($name)
+@mixin archie-component($name, $breakpoints: null, $tweakpoint: null, $units: ())
 {
-  // prefix component name with namespace
-  $ns: archie-namespace();
-  $name: if($ns, '#{$ns}-#{$name}', $name);
+  @if $breakpoints
+  {
+    @include archie-breakpoints($breakpoints, $tweakpoint, $units)
+    {
+      @include archie-component($name);
+    }
+  }
 
-  .#{$name} {
-    @content;
+  @else
+  {
+    // prefix component name with namespace
+    $ns: archie-namespace();
+    $name: if($ns != '', '#{$ns}-#{$name}', $name);
+
+    .#{$name} {
+      @content;
+    }
   }
 }
