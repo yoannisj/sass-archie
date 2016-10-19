@@ -10,7 +10,7 @@
 
 @mixin block( $important: false )
 {
-  display: css-value(block-block, $important);
+  display: css-value(block, $important);
 }
 
 // =-block([ $important ])

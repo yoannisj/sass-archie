@@ -1,0 +1,47 @@
+// ============================================================================
+// =Archie - Gutter
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "aleksi/sides/side-value";
+@import "archie/share";
+
+// =gutter( $side, $amount[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin gutter( $side, $amount, $important: false )
+{
+  // accept 'all' side keyword
+  @if $side == 'all' {
+    @include -gutter('ends', $amount, $important);
+    @include -gutter('sides', $amount, $important);
+  }
+
+  // accept 'ends' side keyword
+  @else if $side == 'ends' {
+    @include -gutter('top', $amount, $important);
+    @include -gutter('bottom', $amount, $important);
+  }
+
+  // accept 'sides' side keyword
+  @else if $side == 'sides' {
+    @include -gutter('left', $amount, $important);
+    @include -gutter('right', $amount, $important);
+  }
+
+  @else
+  {
+    padding-#{$side}: css-value(side-value($amount, $side), $important);
+  }
+}
+
+// =-gutter( $side, $amount[, $important ])
+// -----------------------------------------------------------------------------
+/// @see gutter
+
+@mixin -gutter( $side, $amount, $important: false )
+{
+  @include archie-share('gutter', $side, $amount, $important) {
+    @include gutter($side, $amount, $important);
+  }
+}

@@ -3,8 +3,8 @@
 // ============================================================================
 
 @import "aleksi/general/css-rule";
-@import "archie/share";
 @import "archie/utils/box/flush";
+@import "archie/share";
 
 // =trim( $side[, $important ])
 // -----------------------------------------------------------------------------
@@ -21,18 +21,18 @@
   // accept 'ends' keyword
   @else if $side == 'ends'
   {
-    @include -trim('top', $imporant);
-    @include -trim('bottom', $imporant);
+    @include -trim('top', $important);
+    @include -trim('bottom', $important);
   }
 
   // accept 'sides' keyword
   @else if $side == 'sides' {
-    @include -trim('right', $imporant);
-    @include -trim('left', $imporant);
+    @include -trim('right', $important);
+    @include -trim('left', $important);
   }
 
-  @else if $side == 'left'
-    or $side == 'top'
+  @else if $side == 'top'
+    or $side == 'left'
   {
     > :first-child {
       @include -flush($side, $important);

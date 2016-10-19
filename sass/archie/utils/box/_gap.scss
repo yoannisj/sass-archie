@@ -1,0 +1,47 @@
+// ============================================================================
+// =Archie - Gap
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "aleksi/sides/side-value";
+@import "archie/share";
+
+// =gap( $side, $amount[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin gap( $side, $amount, $important: false )
+{
+  // accept 'all' side keyword
+  @if $side == 'all' {
+    @include -gap('ends', $amount, $important);
+    @include -gap('sides', $amount, $important);
+  }
+
+  // accept 'ends' side keyword
+  @else if $side == 'ends' {
+    @include -gap('top', $amount, $important);
+    @include -gap('bottom', $amount, $important);
+  }
+
+  // accept 'sides' side keyword
+  @else if $side == 'sides' {
+    @include -gap('left', $amount, $important);
+    @include -gap('right', $amount, $important);
+  }
+
+  @else
+  {
+    margin-#{$side}: css-value(side-value($amount, $side), $important);
+  }
+}
+
+// =-gap( $side, $amount[, $important ])
+// -----------------------------------------------------------------------------
+/// @see gap
+
+@mixin -gap( $side, $amount, $important: false )
+{
+  @include archie-share('gap', $side, $amount, $important) {
+    @include gap($side, $amount, $important);
+  }
+}

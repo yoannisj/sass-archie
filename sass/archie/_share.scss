@@ -3,7 +3,7 @@
 // ============================================================================
 
 @import "lilo/share";
-@import "shift/context";
+@import "archie/namespace";
 
 // Mixins
 // ============================================================================
@@ -16,12 +16,13 @@
 @mixin archie-share( $identifier, $args... )
 {
   // prefix identifier with breakpoint namespace
-  $ns: shift-context('archie-namespace');
-  $identifier: if($ns, '#{$ns}-#{$identifier}', $identifier);
+  $ns: archie-namespace();
+  $id: if($ns != '', '#{$ns}-#{$identifier}', '#{$identifier}');
 
+  // @warn "SHARE ID:: #{inspect($id)}";
+  // __shared__: '#{$id}';
   // share styles with sass-lilo
-  @include lilo-share($identifier, $args... )
-  {
+  @include lilo-share($id, $args... ) {
     @content;
   }
 }

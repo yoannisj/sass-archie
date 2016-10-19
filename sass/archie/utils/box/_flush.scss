@@ -18,14 +18,14 @@
 
   // accept 'ends' keyword
   @else if $side == 'ends' {
-    @include -flush('top', $imporant);
-    @include -flush('bottom', $imporant);
+    @include -flush('top', $important);
+    @include -flush('bottom', $important);
   }
 
   // accept 'sides' keyword
   @else if $side == 'sides' {
-    @include -flush('right', $imporant);
-    @include -flush('left', $imporant);
+    @include -flush('right', $important);
+    @include -flush('left', $important);
   }
 
   @else {
