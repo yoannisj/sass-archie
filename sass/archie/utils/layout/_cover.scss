@@ -1,0 +1,29 @@
+// ============================================================================
+// =Archie - Cover
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =cover([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin cover($important: false )
+{
+  position: absolute;
+  top: css-value(0, $important);
+  right: css-value(0, $important);
+  width: 100%;
+  height: 100%;
+}
+
+// =-cover([ $important ])
+// -----------------------------------------------------------------------------
+/// @see cover
+
+@mixin -cover( $important: false )
+{
+  @include archie-share('cover', $important) {
+    @include cover($important);
+  }
+}
