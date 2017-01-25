@@ -19,7 +19,7 @@
 
 @mixin -span( $cols, $total, $important: false )
 {
-  // share spans with same ratio
+  // share spans with same proportions
   @include archie-share('span', ($cols / $total), $important) {
     @include span($cols, $total, $important);
   }

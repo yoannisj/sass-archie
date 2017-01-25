@@ -33,11 +33,11 @@
   }
 }
 
-// =-clearfix( $contain-margins[, $important ])
+// =-clearfix([ $contain-margins, $important ])
 // -----------------------------------------------------------------------------
 /// @see clearfix
 
-@mixin -clearfix( $contain-margins, $important: false )
+@mixin -clearfix( $contain-margins: false, $important: false )
 {
   @include archie-share('clearfix', $contain-margins, $important) {
     @include clearfix($contain-margins, $important);

@@ -4,6 +4,8 @@
 
 @import "aleksi/general/css-rule";
 @import "archie/utils/display/ws";
+@import "archie/utils/display/inline";
+@import "archie/utils/text/align";
 @import "archie/share";
 
 // =centroid([ $text-align, $important ])
@@ -11,15 +13,18 @@
 
 @mixin centroid( $text-align: center, $important: false )
 {
-  @include ws-remove($important);
-  text-align: css-value(center, $important);
+  @include -ws-remove($important);
+  @include -align(center, $important);
 
   &:before,
   > * {
-    @include ws-reset($important);
-    display: inline-block;
+    @include -ws-reset($important);
+    @include -inline($important);
     vertical-align: middle;
-    text-align: css-value(unquote($text-align), $important);
+
+    @if $text-align != center {
+      @include -align($text-align, $important);
+    }
   }
 
   &:before {
@@ -28,11 +33,11 @@
   }
 }
 
-// =-centroid( $text-align[, $important ])
+// =-centroid([ $text-align, $important ])
 // -----------------------------------------------------------------------------
 /// @see centroid
 
-@mixin -centroid( $text-align, $important: false )
+@mixin -centroid( $text-align: center, $important: false )
 {
   @include archie-share('centroid', $text-align, $important) {
     @include centroid($text-align, $important);

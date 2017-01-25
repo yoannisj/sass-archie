@@ -4,15 +4,18 @@
 
 @import "aleksi/lengths/convert";
 @import "archie/utils/display/ws";
+@import "archie/utils/display/inline";
+@import "archie/utils/box/bleed";
+@import "archie/utils/box/gutter";
+@import "archie/share";
 
 // =grid( $gutter )
 // -----------------------------------------------------------------------------
 
 @mixin grid( $gutter )
 {
-  @include ws-remove();
-  margin-left: -0.5 * to-rem($gutter);
-  margin-right: -0.5 * to-rem($gutter);
+  @include -ws-remove();
+  @include -bleed('sides', 0.5 * $gutter);
 }
 
 // =grid-cell( $gutter )
@@ -20,10 +23,30 @@
 
 @mixin grid-cell( $gutter )
 {
-  @include ws-reset();
-  display: inline-block;
+  @include -ws-reset();
+  @include -inline();
+  @include -gutter('sides', 0.5 * $gutter);
+
   vertical-align: top;
   width: 100%;
-  padding-left: 0.5 * to-rem($gutter);
-  padding-right: 0.5 * to-rem($gutter);
+}
+
+// =-grid( $gutter )
+// -----------------------------------------------------------------------------
+
+@mixin -grid( $gutter )
+{
+  @include archie-share('grid', $gutter) {
+    @include grid($gutter);
+  }
+}
+
+// =-grid-cell( $gutter )
+// -----------------------------------------------------------------------------
+
+@mixin -grid-cell( $gutter )
+{
+  @include archie-share('grid-cell', $gutter) {
+    @include grid-cell($gutter);
+  }
 }
