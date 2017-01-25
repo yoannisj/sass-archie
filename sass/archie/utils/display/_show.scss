@@ -1,0 +1,42 @@
+// ============================================================================
+// =Archie - Show
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/utils/display/hide";
+@import "archie/share";
+@import "archie/breakpoint";
+@import "archie/namespace";
+
+// =show([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin show( $important: false )
+{
+  display: css-value(block, $important);
+}
+
+// =-show([ $important ])
+// -----------------------------------------------------------------------------
+/// @see show
+
+@mixin -show( $important: false )
+{
+  @include archie-share('show', $important) {
+    @include show($important);
+  }
+}
+
+// MAKE SURE SHOW OVERRIDES ANY SHARED 'HIDE' UTILITY
+// ==================================================
+
+@include archie-breakpoints('min-width')
+{
+  $ns: archie-namespace();
+  $prefix: if($ns, '#{$ns}-', '');
+
+  %#{$prefix}show-before {
+    @include -hide(true);
+    @include -hide();
+  }
+}

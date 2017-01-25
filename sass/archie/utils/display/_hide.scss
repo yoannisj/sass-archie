@@ -1,0 +1,25 @@
+// ============================================================================
+// =Archie - Hide
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =hide([ $important ])
+// -----------------------------------------------------------------------------
+
+@mixin hide( $important: false )
+{
+  display: css-value(none, $important);
+}
+
+// =-hide([ $important ])
+// -----------------------------------------------------------------------------
+/// @see hide
+
+@mixin -hide( $important: false )
+{
+  @include archie-share('hide', $important) {
+    @include hide($important);
+  }
+}
