@@ -1,0 +1,74 @@
+// ============================================================================
+// =Archie - Underline
+// ============================================================================
+
+// TODO: implement parameters
+// - distance
+// - width
+// - spread
+
+@import "archie/settings";
+
+// =underline( $color, [$background, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin underline( $color, $background: $base-background, $important: false)
+{
+  text-decoration: none;
+  text-shadow:
+    -0.1em -0.02em $background,
+    -0.05em -0.02em $background,
+    0.05em -0.02em $background,
+    0.1em -0.02em $background,
+    -0.1em 0.02em $background,
+    -0.05em 0.02em $background,
+    0.05em 0.02em $background,
+    0.1em 0.02em $background;
+  background-size:
+    0.05em 0.08em, /* clip-left-line */
+    0.05em 0.08em, /* clip-right-line */
+    0.08em 0.08em; /* draw-underline */
+  background-repeat:
+    no-repeat, /* clip-left-line */
+    no-repeat, /* clip-right-line */
+    repeat-x; /* draw-underline */
+  background-position:
+    0 100%, /* clip-left-line */
+    100% 100%, /* clip-right-line */
+    0 100%; /* draw-underline */
+
+  @include underline-color($color, $background, $important);
+}
+
+// =underline-color( $color, [$background, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin underline-color( $color, $background: $base-background, $important: false)
+{
+  background-image:
+    linear-gradient($background, $background), /* clip-left-line */
+    linear-gradient($background, $background), /* clip-right-line */
+    linear-gradient($color, $color); /* draw-underline */
+}
+
+// =-underline( $color, [$background, $important ])
+// -----------------------------------------------------------------------------
+// @see underline
+
+@mixin -underline( $color, $background: $base-background, $important: false )
+{
+  @include archie-share('underline', $color, $background, $important) {
+    @include underline( $color, $background, $important )
+  }
+}
+
+// =-underline-color( $color, [$background, $important ])
+// -----------------------------------------------------------------------------
+// @see underline-color
+
+@mixin -underline-color( $color, $background: $base-background, $important: false)
+{
+  @include archie-share('underline-color', $color, $background, $important) {
+    @include underline-color( $color, $background, $important )
+  }
+}

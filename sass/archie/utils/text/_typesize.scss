@@ -1,0 +1,30 @@
+// ============================================================================
+// =Archie - Typesize
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "aleksi/general/default-to";
+@import "shift/context";
+@import "typical/defaults";
+@import "typical/typesize";
+@import "archie/share";
+
+// =typesize( $size[, $font, $bp, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin typesize( $size, $font: $typical-base-font, $bp: null, $important: false )
+{
+  $bp: default-to($bp, shift-context('min-width-label'), 'base');
+  @include typical-typesize($size, $font, $bp);
+}
+
+// =-typesize( $size[, $font, $bp, $important ])
+// -----------------------------------------------------------------------------
+/// @see typesize
+
+@mixin -typesize( $size, $font: $typical-base-font, $bp: null, $important: false )
+{
+  @include archie-share('typesize', $size, $font, $bp, $important) {
+    @include typesize($size, $font, $bp, $important);
+  }
+}

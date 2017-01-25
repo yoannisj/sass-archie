@@ -1,0 +1,28 @@
+// ============================================================================
+// =Archie - Typeface
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "aleksi/general/default-to";
+@import "shift/context";
+@import "typical/typeface";
+@import "archie/share";
+
+// =typeface( $font, $face[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin typeface( $font, $face, $important: false )
+{
+  @include typical-typeface($font, $face);
+}
+
+// =-typeface( $font, $face[, $important ])
+// -----------------------------------------------------------------------------
+/// @see typeface
+
+@mixin -typeface( $font, $face, $important: false )
+{
+  @include archie-share('typeface', $font, $face, $important) {
+    @include typeface($font, $face, $important);
+  }
+}

@@ -1,0 +1,28 @@
+// ============================================================================
+// =Archie - Nowrap
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =nowrap( $text-overflow[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin nowrap( $text-overflow: ellipsis, $important: false )
+{
+  max-width: 100%;
+  white-space: css-value(nowrap, $important);
+  text-overflow: $text-overflow;
+  overflow-x: hidden;
+}
+
+// =-nowrap( $text-overflow[, $important ])
+// -----------------------------------------------------------------------------
+/// @see nowrap
+
+@mixin -nowrap( $text-overflow: ellipsis, $important: false )
+{
+  @include archie-share('nowrap', $text-overflow, $important) {
+    @include nowrap($text-overflow, $important);
+  }
+}
