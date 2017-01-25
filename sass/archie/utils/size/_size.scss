@@ -1,0 +1,29 @@
+// ============================================================================
+// =Archie - Size
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/share";
+
+// =size( $dimen[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin size( $dimen, $important: false )
+{ 
+  $w: nth($dimen, 1);
+  $h: if(length($dimen) > 1, nth($dimen, 2), $w);
+
+  width: css-value($w, $important);
+  height: css-value($h, $important);
+}
+
+// =-size( $dimen[, $important ])
+// -----------------------------------------------------------------------------
+/// @see size
+
+@mixin -size( $dimen: null, $important: false )
+{
+  @include archie-share('size', $dimen, $important) {
+    @include size($dimen, $important);
+  }
+}

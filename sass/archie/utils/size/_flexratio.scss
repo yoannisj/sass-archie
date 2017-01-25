@@ -1,0 +1,48 @@
+// ============================================================================
+// =Archie - Flexratio
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/utils/layout/cover";
+@import "archie/share";
+
+// =flexratio( $start, $end[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin flexratio( $start, $end, $important: false )
+{  
+  $start-w: nth($start, 1); 
+  $start-h: nth($start, 2);
+  $end-w: nth($end, 1);
+  $end-h: nth($end, 2);
+
+  $slope: ($end-h - $start-h) / ($end-w - $start-w);
+  $height: $start-h - ($start-w * $slope);
+
+  position: relative;
+  min-width: css-value($start-w, $important);
+  max-width: css-value($end-w, $important);
+
+  &:before {
+    content: " ";
+    box-sizing: content-box;
+    display: block;
+    height: css-value($height, $important);
+    padding-top: css-value(percentage($slope), $important);
+  }
+
+  > * {
+    @include -cover($important);
+  }
+}
+
+// =-flexratio( $start, $end[, $important ])
+// -----------------------------------------------------------------------------
+/// @see flexratio
+
+@mixin -flexratio( $start, $end, $important: false )
+{
+  @include archie-share('flexratio', $start, $end, $important) {
+    @include flexratio($start, $end, $important);
+  }
+}

@@ -1,0 +1,34 @@
+// ============================================================================
+// =Archie - Ratio
+// ============================================================================
+
+@import "aleksi/general/css-rule";
+@import "archie/utils/layout/cover";
+@import "archie/share";
+
+// =ratio( $width, $height[, $important ])
+// -----------------------------------------------------------------------------
+
+@mixin ratio( $width, $height, $important: false )
+{
+  position: relative;
+  display: block;
+  height: css-value(0, $important);
+  padding: css-value(percentage($height/$width), $important) 0 0;
+
+  > * {
+    @include -cover($important);
+  }
+}
+
+// =-ratio( $width, $height[, $important ])
+// -----------------------------------------------------------------------------
+/// @see ratio
+
+@mixin -ratio( $width, $height, $important: false )
+{
+  // share ratios with same proportions
+  @include archie-share('ratio', ($height/$width), $important) {
+    @include ratio($width, $height, $important);
+  }
+}
